@@ -257,3 +257,56 @@ input[type="range"]::-webkit-slider-thumb:hover {
 .animate-drop-fade {
   animation: drop-fade 0.5s steps(5) forwards; /* Step-like retro transition */
 }
+
+/* Retro Pixel Tooltip */
+.pixel-tooltip {
+  position: absolute;
+  pointer-events: none;
+  background-color: #100f1a;
+  color: #ffd043;
+  border: 2px solid #f7e6c4;
+  padding: 4px 8px;
+  font-family: var(--font-pixel-small);
+  font-size: 8px;
+  box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  white-space: nowrap;
+}
+
+/* Slide up and fade dashboard overlay */
+.dashboard-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgba(13, 12, 16, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: transform 0.4s steps(6), opacity 0.4s ease-in-out;
+}
+
+.dashboard-hidden {
+  transform: translateY(100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* CRT monitor scanlines decoration for game screen feel */
+.scanlines-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.06),
+    rgba(0, 255, 0, 0.02),
+    rgba(0, 0, 255, 0.06)
+  );
+  background-size: 100% 4px, 6px 100%;
+  pointer-events: none;
+  z-index: 30;
+}
