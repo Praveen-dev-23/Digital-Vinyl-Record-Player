@@ -292,8 +292,8 @@ export function CozyRoomScene({ isPlaying, spinSpeed = 0, onOpenTurntable }) {
       maskCanvas.height = baseH;
       const mctx = maskCanvas.getContext("2d");
 
-      // Fill with evening shadow color tint
-      mctx.fillStyle = "rgba(15, 12, 28, 0.4)";
+      // Fill with a subtle, warm cozy evening shadow tint to keep the room extremely bright and vibrant
+      mctx.fillStyle = "rgba(12, 10, 22, 0.15)";
       mctx.fillRect(0, 0, baseW, baseH);
 
       // Carve out light spots

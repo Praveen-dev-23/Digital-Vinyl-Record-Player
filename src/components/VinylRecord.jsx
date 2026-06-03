@@ -36,37 +36,35 @@ export function VinylRecord({
     canvas.height = size;
 
     const drawRecord = () => {
-      // 1. Clear canvas
       ctx.clearRect(0, 0, size, size);
 
-      // 2. Rotate the drawing context
       ctx.save();
       ctx.translate(size / 2, size / 2);
       ctx.rotate((rotationRef.current * Math.PI) / 180);
 
-      // 3. Draw Outer Vinyl Disc (matte black/dark purple)
-      ctx.fillStyle = "#161420";
+      // Outer Vinyl Disc
+      ctx.fillStyle = "#141122";
       ctx.beginPath();
       ctx.arc(0, 0, 60, 0, Math.PI * 2);
       ctx.fill();
 
-      // Outer rim highlight (pixel style)
-      ctx.strokeStyle = "#252234";
+      // Outer rim highlight
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
       ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.arc(0, 0, 59, 0, Math.PI * 2);
       ctx.stroke();
 
-      // 4. Concentric Grooves (pixel rings)
-      ctx.strokeStyle = "#0d0c12";
+      // Concentric Grooves
+      ctx.strokeStyle = "#08070d";
       [14, 20, 26, 32, 38, 44, 50, 55].forEach((r) => {
         ctx.beginPath();
         ctx.arc(0, 0, r, 0, Math.PI * 2);
         ctx.stroke();
       });
 
-      // Subtle groove texture details (dots/dashes)
-      ctx.strokeStyle = "#1d1a29";
+      // Subtle groove texture details
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.04)";
       ctx.setLineDash([2, 4]);
       ctx.beginPath();
       ctx.arc(0, 0, 48, 0, Math.PI * 2);
@@ -74,40 +72,36 @@ export function VinylRecord({
       ctx.beginPath();
       ctx.arc(0, 0, 36, 0, Math.PI * 2);
       ctx.stroke();
-      ctx.setLineDash([]); // reset
+      ctx.setLineDash([]);
 
-      // 5. Center Album Label (16-bit retro colors, pink and cyan ring)
-      // Base label circle
-      ctx.fillStyle = "#ffd043"; // Gold base
+      // Center Album Label (vibrant neon pink/cyan/gold)
+      ctx.fillStyle = "#ffb800"; // Gold base
       ctx.beginPath();
       ctx.arc(0, 0, 18, 0, Math.PI * 2);
       ctx.fill();
 
-      // Outer label ring (cozy pink)
-      ctx.fillStyle = "#ff7ea5";
+      ctx.fillStyle = "#ff3b7e"; // Neon Pink
       ctx.beginPath();
       ctx.arc(0, 0, 15, 0, Math.PI * 2);
       ctx.fill();
 
-      // Inner label ring (vibrant cyan)
-      ctx.fillStyle = "#4ba3a5";
+      ctx.fillStyle = "#00f0ff"; // Neon Cyan
       ctx.beginPath();
       ctx.arc(0, 0, 10, 0, Math.PI * 2);
       ctx.fill();
 
-      // Center label core (off white)
-      ctx.fillStyle = "#f7e6c4";
+      ctx.fillStyle = "#f5f3f7"; // Off white core
       ctx.beginPath();
       ctx.arc(0, 0, 6, 0, Math.PI * 2);
       ctx.fill();
 
-      // Tiny pixel slots to show label rotation/texture
-      ctx.fillStyle = "#161420";
+      // Tiny slots to show rotation
+      ctx.fillStyle = "#141122";
       ctx.fillRect(-8, -1, 2, 2);
       ctx.fillRect(6, -1, 2, 2);
 
-      // 6. Spindle hole (center absolute dark)
-      ctx.fillStyle = "#0d0c12";
+      // Spindle hole
+      ctx.fillStyle = "#08070d";
       ctx.beginPath();
       ctx.arc(0, 0, 2, 0, Math.PI * 2);
       ctx.fill();
@@ -117,9 +111,7 @@ export function VinylRecord({
 
     const updateRotation = () => {
       if (!isDraggingRef.current) {
-        // 33.3 RPM is ~200 degrees/second. At 60 FPS, this is ~3.33 degrees per frame.
-        // We multiply by spinSpeed (managed by inertia/physics in hook)
-        rotationRef.current += spinSpeed * 3.33;
+        rotationRef.current += (spinSpeed || 0) * 3.33;
       }
       
       drawRecord();
@@ -130,7 +122,6 @@ export function VinylRecord({
     return () => cancelAnimationFrame(animationFrameRef.current);
   }, [spinSpeed]);
 
-  // Calculate angle of coordinate relative to vinyl center
   const getAngle = (clientX, clientY) => {
     if (!containerRef.current) return 0;
     const rect = containerRef.current.getBoundingClientRect();
@@ -186,8 +177,6 @@ export function VinylRecord({
     }
 
     rotationRef.current += deltaAngle;
-
-    // Report scratch values back to audio analyzer
     scratchTo(deltaAngle, dragSpeedRef.current);
 
     prevAngleRef.current = currentAngle;
@@ -200,7 +189,7 @@ export function VinylRecord({
 
   const handleTouchMove = (e) => {
     if (e.touches.length === 1) {
-      e.preventDefault(); // prevent scroll bounce
+      e.preventDefault();
       processDrag(e.touches[0].clientX, e.touches[0].clientY);
     }
   };
@@ -227,43 +216,36 @@ export function VinylRecord({
       ref={containerRef}
       className="relative w-[345px] h-[345px] md:w-[445px] md:h-[445px] flex items-center justify-center select-none"
     >
-      {/* 1. Wooden Chassis Cabinet (Cozy Retro Turntable Box) */}
+      {/* 1. Sleek Cyber Glass Chassis Container */}
       <div 
-        className="absolute inset-0 rounded-2xl border-[6px] border-[#100f1a] shadow-[8px_12px_0px_rgba(0,0,0,0.5)] flex flex-col justify-between p-4"
-        style={{
-          backgroundColor: "#5a3825", // Wood grain brown
-          backgroundImage: "linear-gradient(to right, #503120 50%, #5a3825 50%)", // wood panel split texture
-          backgroundSize: "20px 100%",
-        }}
+        className="absolute inset-0 rounded-3xl border border-white/10 bg-[#120f26]/80 backdrop-blur-xl shadow-2xl flex flex-col justify-between p-5"
       >
-        {/* Chassis inner shadow and grain lines */}
-        <div className="absolute inset-0 border-t-4 border-l-4 border-r-4 border-b-4 border-t-white/10 border-l-white/10 border-r-black/30 border-b-black/30 pointer-events-none rounded-lg" />
+        <div className="absolute inset-0 border border-white/5 pointer-events-none rounded-3xl" />
         
-        {/* Top Label & Decorative Text (Retro branding) */}
-        <div className="flex justify-between items-center w-full z-10 px-2 pt-1 font-serif text-[10px] text-[#f7e6c4]/40 tracking-wider">
-          <span>KISSEN SYSTEM-16</span>
-          <span className="font-sans text-[7px]">MADE IN SHIBUYA</span>
+        {/* Top Label & Decorative Text */}
+        <div className="flex justify-between items-center w-full z-10 px-2 pt-1 font-serif text-[10px] text-off-white/40 tracking-wider">
+          <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-neon-pink to-neon-cyan">KISSEN CYBER-16</span>
+          <span className="font-sans text-[7px] font-semibold opacity-70">MADE IN SHIBUYA</span>
         </div>
 
-        {/* Bottom Panel Controls (Power switch & speed selectors) */}
+        {/* Bottom Panel Controls */}
         <div className="flex justify-between items-end w-full z-10 px-2 pb-1">
-          {/* Decorative gold dust specs at bottom-left */}
           <div className="flex gap-1.5 opacity-60">
-            <div className="w-2.5 h-2.5 bg-[#ffd043] border border-[#100f1a] shadow-sm rounded-sm" />
-            <div className="w-2.5 h-2.5 bg-[#ff7ea5] border border-[#100f1a] shadow-sm rounded-sm" />
+            <div className="w-2.5 h-2.5 bg-neon-cyan/80 shadow-[0_0_8px_rgba(0,240,255,0.5)] rounded-full" />
+            <div className="w-2.5 h-2.5 bg-neon-pink/80 shadow-[0_0_8px_rgba(255,59,126,0.5)] rounded-full" />
           </div>
 
-          {/* RPM Buttons Group (33 / 45) */}
-          <div className="flex gap-1">
+          {/* RPM Buttons Group */}
+          <div className="flex gap-2">
             <button 
               onClick={() => setRpmMode(33)}
-              className={`w-6 h-6 font-mono text-[8px] border-2 border-[#100f1a] flex items-center justify-center cursor-pointer shadow-[1px_2px_0px_rgba(0,0,0,0.4)] ${rpmMode === 33 ? 'bg-[#ffd043] text-[#100f1a] font-bold' : 'bg-[#34304b] text-[#f7e6c4]/60'}`}
+              className={`w-7 h-7 font-mono text-[9px] rounded-full border border-white/10 flex items-center justify-center cursor-pointer shadow-lg active:scale-95 transition-all ${rpmMode === 33 ? 'bg-gradient-to-r from-neon-pink to-amber-glow text-white font-bold border-none shadow-neon-pink/20' : 'bg-white/5 text-off-white/50 hover:bg-white/10'}`}
             >
               33
             </button>
             <button 
               onClick={() => setRpmMode(45)}
-              className={`w-6 h-6 font-mono text-[8px] border-2 border-[#100f1a] flex items-center justify-center cursor-pointer shadow-[1px_2px_0px_rgba(0,0,0,0.4)] ${rpmMode === 45 ? 'bg-[#ffd043] text-[#100f1a] font-bold' : 'bg-[#34304b] text-[#f7e6c4]/60'}`}
+              className={`w-7 h-7 font-mono text-[9px] rounded-full border border-white/10 flex items-center justify-center cursor-pointer shadow-lg active:scale-95 transition-all ${rpmMode === 45 ? 'bg-gradient-to-r from-neon-pink to-amber-glow text-white font-bold border-none shadow-neon-pink/20' : 'bg-white/5 text-off-white/50 hover:bg-white/10'}`}
             >
               45
             </button>
@@ -271,33 +253,31 @@ export function VinylRecord({
         </div>
       </div>
 
-      {/* 2. Platter circular base (Dark metal backing inside wood deck) */}
+      {/* 2. Platter circular base */}
       <div 
-        className="absolute inset-[15px] rounded-full border-4 border-[#100f1a] shadow-[inset_4px_4px_0px_rgba(0,0,0,0.6)]"
-        style={{ backgroundColor: "#211f30" }}
+        className="absolute inset-[15px] rounded-full border border-white/10 shadow-inner"
+        style={{ backgroundColor: "rgba(0, 0, 0, 0.4)" }}
       />
       
-      {/* Platter outer rim decorative dashed circle */}
-      <div className="absolute inset-[21px] rounded-full border-2 border-dashed border-[#34304b] opacity-40 pointer-events-none" />
+      <div className="absolute inset-[21px] rounded-full border border-dashed border-white/5 opacity-40 pointer-events-none" />
 
       {/* 3. The Canvas-based rotating vinyl record */}
       <canvas 
         ref={canvasRef}
         onMouseDown={handleMouseDown}
         onTouchStart={handleTouchStart}
-        className={`absolute inset-[30px] w-[calc(100%-60px)] h-[calc(100%-60px)] rounded-full cursor-grab active:cursor-grabbing shadow-[0px_8px_16px_rgba(0,0,0,0.6)] border-[3px] border-[#100f1a] ${isScratching ? 'shadow-[0_0_24px_rgba(255,126,27,0.3)]' : ''}`}
+        className={`absolute inset-[30px] w-[calc(100%-60px)] h-[calc(100%-60px)] rounded-full cursor-grab active:cursor-grabbing shadow-2xl border border-white/15 ${isScratching ? 'shadow-[0_0_30px_rgba(255,59,126,0.35)]' : ''}`}
         style={{ 
-          imageRendering: "pixelated",
           transformOrigin: "center center"
         }}
       />
 
-      {/* 4. Static vinyl blocky shine overlay (does not rotate) */}
+      {/* 4. Static vinyl blocky shine overlay */}
       <div className="absolute inset-[30px] rounded-full vinyl-shine pointer-events-none z-10" />
 
-      {/* 5. Center metal spindle cylinder (blocky pixel appearance) */}
-      <div className="absolute w-5 h-5 rounded-full bg-[#34304b] border-2 border-[#100f1a] shadow-[0px_2px_4px_rgba(0,0,0,0.5)] flex items-center justify-center pointer-events-none z-10">
-        <div className="w-1.5 h-1.5 bg-[#ffd043] rounded-full" />
+      {/* 5. Center metal spindle cylinder */}
+      <div className="absolute w-5 h-5 rounded-full bg-white/10 border border-white/20 shadow-md flex items-center justify-center pointer-events-none z-10">
+        <div className="w-1.5 h-1.5 bg-[#ffd043] rounded-full shadow-[0_0_4px_#ffd043]" />
       </div>
     </div>
   );

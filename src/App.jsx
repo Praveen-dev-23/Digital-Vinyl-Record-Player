@@ -59,7 +59,7 @@ function App() {
         
         {/* Retro Brand Label */}
         <div className="flex items-center gap-3 pointer-events-auto">
-          <div className="relative w-8 h-8 flex items-center justify-center border-2 border-[#100f1a] bg-[#16151f] shadow-md rounded-sm">
+          <div className="relative w-8 h-8 flex items-center justify-center border border-white/10 bg-white/5 shadow-md rounded-lg">
             <Disc className={`w-4 h-4 text-[#ffd043] ${isPlaying ? 'animate-spin' : ''}`} style={{ animationDuration: '4s' }} />
           </div>
           <div>
@@ -74,8 +74,8 @@ function App() {
 
         {/* Dynamic retro status bar */}
         <div className="hidden sm:flex items-center gap-6">
-          <div className="flex items-center gap-2 text-[9px] text-[#f7e6c4]/60 tracking-wider font-mono uppercase bg-[#16151f] px-3 py-1.5 border-2 border-[#100f1a] shadow-[inset_1px_1px_0px_rgba(0,0,0,0.4)]">
-            <span className={`w-1.5 h-1.5 rounded-full ${isPlaying ? 'bg-[#ffd043] shadow-[0_0_6px_#ffd043] animate-pulse' : 'bg-[#34304b]'}`} />
+          <div className="flex items-center gap-2 text-[10px] text-off-white/70 tracking-wider font-mono uppercase bg-white/5 backdrop-blur-md px-3.5 py-1.5 border border-white/10 rounded-full shadow-lg">
+            <span className={`w-1.5 h-1.5 rounded-full ${isPlaying ? 'bg-[#ffd043] shadow-[0_0_8px_#ffd043] animate-pulse' : 'bg-[#34304b]'}`} />
             <span>{isPlaying ? 'ANALOG SPINNING' : 'SYSTEM IDLE'}</span>
           </div>
         </div>
@@ -84,14 +84,14 @@ function App() {
         <div className="flex items-center gap-3 pointer-events-auto">
           <button 
             onClick={() => setIsLiked(!isLiked)}
-            className={`w-10 h-10 border-2 border-[#100f1a] bg-[#16151f] hover:bg-[#34304b] transition-all flex items-center justify-center cursor-pointer shadow-[2px_2px_0px_rgba(0,0,0,0.4)] active:translate-y-0.5 active:shadow-[1px_1px_0px_rgba(0,0,0,0.4)] ${isLiked ? 'text-[#ff7ea5]' : 'text-[#f7e6c4]/50'}`}
+            className={`w-10 h-10 border border-white/10 rounded-xl bg-white/5 hover:bg-white/10 hover:border-white/20 transition-all flex items-center justify-center cursor-pointer shadow-lg active:scale-95 ${isLiked ? 'text-neon-pink bg-neon-pink/10 border-neon-pink/30' : 'text-off-white/60'}`}
           >
             <Heart className={`w-4 h-4 ${isLiked ? 'fill-current' : ''}`} />
           </button>
           
           <button 
             onClick={() => setAboutOpen(true)}
-            className="w-10 h-10 border-2 border-[#100f1a] bg-[#16151f] hover:bg-[#34304b] text-[#f7e6c4]/50 hover:text-[#ffd043] transition-all flex items-center justify-center cursor-pointer shadow-[2px_2px_0px_rgba(0,0,0,0.4)] active:translate-y-0.5 active:shadow-[1px_1px_0px_rgba(0,0,0,0.4)]"
+            className="w-10 h-10 border border-white/10 rounded-xl bg-white/5 hover:bg-white/10 hover:border-white/20 text-off-white/60 hover:text-amber-light transition-all flex items-center justify-center cursor-pointer shadow-lg active:scale-95"
           >
             <Info className="w-4 h-4" />
           </button>
@@ -103,7 +103,7 @@ function App() {
         <div className="absolute bottom-6 right-6 z-40 animate-drop-fade pointer-events-auto">
           <button 
             onClick={() => setTurntableOpen(true)}
-            className="pixel-btn pixel-btn-amber flex items-center gap-2 border-2 border-[#100f1a] font-bold text-xs uppercase"
+            className="pixel-btn pixel-btn-amber flex items-center gap-2 font-bold text-xs uppercase"
           >
             <Disc className="w-3.5 h-3.5 animate-spin" style={{ animationDuration: '6s' }} />
             OPEN PLAYER DECK
@@ -127,8 +127,8 @@ function App() {
         <div className="absolute top-6 right-6 md:right-12 z-50 pointer-events-auto">
           <button 
             onClick={() => setTurntableOpen(false)}
-            className="pixel-btn flex items-center gap-2 border-2 border-[#100f1a] text-xs font-bold font-mono"
-            style={{ backgroundColor: "#ff7ea5", color: "#100f1a" }}
+            className="pixel-btn flex items-center gap-2 text-xs font-bold"
+            style={{ background: "linear-gradient(135deg, #ff3b7e 0%, #ff7ea5 100%)", color: "#ffffff" }}
           >
             <X className="w-3.5 h-3.5" />
             CLOSE DECK [X]
@@ -137,7 +137,7 @@ function App() {
 
         {/* Dashboard Title branding */}
         <div className="w-full flex justify-center pt-8 z-40 select-none pointer-events-none">
-          <div className="px-5 py-2 border-2 border-[#100f1a] bg-[#16151f] text-[#ffd043] font-mono text-xs font-bold uppercase tracking-widest shadow-md">
+          <div className="px-5 py-2 border border-white/10 rounded-full bg-white/5 backdrop-blur-md text-[#ffd043] font-mono text-[10px] font-bold uppercase tracking-widest shadow-lg">
             TURNTABLE CONSOLE SYSTEM
           </div>
         </div>
@@ -211,7 +211,7 @@ function App() {
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 10 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-[#211f30] border-[6px] border-[#100f1a] p-8 shadow-[8px_8px_0px_rgba(0,0,0,0.6)] max-w-md w-full text-[#f7e6c4] cursor-default select-none text-center"
+              className="glass-panel p-8 max-w-md w-full text-off-white cursor-default select-none text-center shadow-2xl"
             >
               <Headphones className="w-10 h-10 text-[#ffd043] mx-auto mb-4" />
               <h3 className="font-serif text-3xl text-[#ffd043] tracking-wide mb-3 font-bold">
@@ -237,11 +237,11 @@ function App() {
                 • **Bed & Plushies**: Click Finn the Human or the Teddy Bear on the bed to hug them and trigger floating heart particles.
               </p>
               
-              <div className="border-t-2 border-[#100f1a] pt-5 flex flex-col gap-2.5 text-[11px] text-[#f7e6c4]/40 font-mono uppercase tracking-wider">
+              <div className="border-t border-white/10 pt-5 flex flex-col gap-2.5 text-[11px] text-off-white/40 font-mono uppercase tracking-wider">
                 <p>PRODUCED FOR PIXEL-ART MUSIC LOVERS</p>
                 <button 
                   onClick={() => setAboutOpen(false)}
-                  className="pixel-btn pixel-btn-amber mt-4 w-full text-xs font-bold py-3 border-2 border-[#100f1a] cursor-pointer"
+                  className="pixel-btn pixel-btn-amber mt-4 w-full text-xs font-bold py-3 cursor-pointer"
                 >
                   ENTER COZY ROOM
                 </button>

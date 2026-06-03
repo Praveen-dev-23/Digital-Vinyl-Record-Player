@@ -195,13 +195,9 @@ export function BackgroundAmbience({ isPlaying, audioContext, spinSpeed }) {
 
       {/* Audio Ambiance HUD controls (floating side deck) - pointer events enabled */}
       <div 
-        className="absolute left-6 top-[28%] z-50 pointer-events-auto flex flex-col gap-4 p-4 rounded-xl w-48 text-[#f7e6c4] text-xs drop-shadow-xl translate-y-[-50%] border-[4px] border-[#100f1a] animate-drop-fade"
-        style={{
-          backgroundColor: "#5a3825", // Wood deck
-          backgroundImage: "linear-gradient(to bottom, #5a3825, #4d2f1f)",
-        }}
+        className="absolute left-6 top-[28%] z-50 pointer-events-auto flex flex-col gap-4 p-4 w-48 text-off-white text-xs translate-y-[-50%] glass-panel animate-drop-fade"
       >
-        <h4 className="font-mono uppercase tracking-wider text-[10px] text-[#ffd043] border-b-2 border-[#100f1a] pb-2 mb-1 font-bold">
+        <h4 className="font-mono uppercase tracking-wider text-[10px] text-[#ffd043] border-b border-white/10 pb-2 mb-1 font-bold">
           AMBIENT MIXER
         </h4>
 
