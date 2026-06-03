@@ -1,0 +1,259 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&family=Share+Tech+Mono&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-matte-black: #0d0c10;
+  --color-charcoal-dark: #16151f;
+  --color-charcoal-medium: #211f30;
+  --color-charcoal-light: #34304b;
+  --color-amber-glow: #ff7e1b;
+  --color-amber-light: #ffd043;
+  --color-off-white: #f7e6c4;
+  
+  --font-sans: "Share Tech Mono", monospace;
+  --font-serif: "VT323", monospace;
+  --font-pixel-small: "Press Start 2P", monospace;
+}
+
+/* Base resets & custom scrollbar */
+:root {
+  color-scheme: dark;
+  font-family: var(--font-sans);
+  background-color: var(--color-matte-black);
+  color: var(--color-off-white);
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  user-select: none;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: none;
+}
+
+#root {
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Custom Scrollbar for playlists and overlays */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Custom retro pixel panel utilities (replacing glassmorphism with retro wood/metal panels) */
+.glass-panel {
+  background: var(--color-charcoal-medium);
+  border: 4px solid #100f1a;
+  box-shadow: 
+    inset -4px -4px 0px 0px rgba(0, 0, 0, 0.4),
+    inset 4px 4px 0px 0px rgba(255, 255, 255, 0.15),
+    4px 4px 0px 0px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.glass-panel-light {
+  background: var(--color-charcoal-light);
+  border: 2px solid #100f1a;
+  box-shadow: 
+    inset -2px -2px 0px 0px rgba(0, 0, 0, 0.4),
+    inset 2px 2px 0px 0px rgba(255, 255, 255, 0.1);
+}
+
+/* Cozy Japanese listening room dynamic warm glow (more vibrant & warm) */
+.ambient-glow {
+  background: radial-gradient(circle, rgba(255, 126, 27, 0.22) 0%, rgba(255, 80, 80, 0.05) 50%, transparent 100%);
+  filter: blur(20px); /* slightly sharper than modern, but cozy */
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.ambient-glow-subtle {
+  background: radial-gradient(circle, rgba(255, 208, 67, 0.12) 0%, rgba(0, 0, 0, 0) 70%);
+  pointer-events: none;
+}
+
+/* Vinyl record grooves and shine style - pixelated */
+.vinyl-grooves {
+  background: repeating-radial-gradient(
+    circle at center,
+    #13121a 0px,
+    #13121a 3px,
+    #1c1a26 4px,
+    #252333 5px,
+    #13121a 6px
+  );
+}
+
+/* Reflection overlay on vinyl - blocky, pixelated shine */
+.vinyl-shine {
+  background: conic-gradient(
+    from 0deg,
+    transparent 15deg,
+    rgba(255, 255, 255, 0.06) 45deg,
+    transparent 75deg,
+    transparent 195deg,
+    rgba(255, 255, 255, 0.06) 225deg,
+    transparent 255deg
+  );
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* Cozy window frame overlay for rainy night */
+.cozy-window-overlay {
+  background: linear-gradient(to bottom, rgba(13, 12, 16, 0.2) 0%, rgba(13, 12, 16, 0.6) 100%);
+  pointer-events: none;
+}
+
+/* Hide default file input appearance */
+.custom-file-upload input[type="file"] {
+  display: none;
+}
+
+/* Custom styles for range sliders to feel like pixelated progress bars */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  height: 16px;
+}
+
+input[type="range"]:focus {
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  background: #13121a;
+  border: 2px solid #34304b;
+  height: 12px;
+  box-shadow: inset -2px -2px 0 0 rgba(255, 255, 255, 0.05), inset 2px 2px 0 0 rgba(0, 0, 0, 0.5);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: var(--color-amber-light);
+  border: 2px solid #13121a;
+  height: 16px;
+  width: 12px;
+  margin-top: -4px; /* Center in track */
+  box-shadow: inset -2px -2px 0 0 rgba(0, 0, 0, 0.4), inset 2px 2px 0 0 rgba(255, 255, 255, 0.4);
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  background-color: var(--color-amber-glow);
+}
+
+/* Slider progress tracking overlay */
+.slider-progress {
+  position: relative;
+}
+
+/* Noise & grain background (make it slightly more visible for retro textures) */
+.noise-background {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  right: -50%;
+  bottom: -50%;
+  width: 200%;
+  height: 200%;
+  background: transparent url('data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PScwIDAgMjAwIDIwMCcgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJz48ZmlsdGVyIGlkPSdub2lzZUZpbHRlcic+PGZlVHVyYnVsZW5jZSB0eXBlPSdmcmFjdGFsTm9pc2UnIGJhc2VGcmVxdWVuY3k9JzAuOScgbnVtT2N0YXZlcz0nMicgc3RpdGNoVGlsZXM9J3N0aXRjaCcvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPScxMDAlJyBoZWlnaHQ9JzEwMCUnIGZpbHRlcj0ndXJsKCNub2lzZUZpbHRlciknLz48L3N2Zz4=') repeat;
+  opacity: 0.035;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Pixel art helper utilities */
+.pixel-btn {
+  background: var(--color-charcoal-light);
+  border: 2px solid #100f1a;
+  color: var(--color-off-white);
+  padding: 6px 12px;
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  box-shadow: 
+    inset -2px -2px 0px 0px rgba(0, 0, 0, 0.4),
+    inset 2px 2px 0px 0px rgba(255, 255, 255, 0.1),
+    2px 2px 0px 0px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: none;
+}
+
+.pixel-btn:hover {
+  background: var(--color-off-white);
+  color: var(--color-matte-black);
+}
+
+.pixel-btn:active {
+  box-shadow: 
+    inset 2px 2px 0px 0px rgba(0, 0, 0, 0.6),
+    1px 1px 0px 0px rgba(0, 0, 0, 0.5);
+  transform: translate(1px, 1px);
+}
+
+.pixel-btn-amber {
+  background: var(--color-amber-glow);
+  color: #100f1a;
+  font-weight: bold;
+}
+
+.pixel-btn-amber:hover {
+  background: var(--color-amber-light);
+}
+
+.pixel-box-inset {
+  background: #13121a;
+  border: 2px solid #34304b;
+  box-shadow: 
+    inset 2px 2px 0px 0px rgba(0, 0, 0, 0.6),
+    inset -2px -2px 0px 0px rgba(255, 255, 255, 0.05);
+}
+
+/* Animations */
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.25; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.03); }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 6s infinite ease-in-out;
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-4px); }
+}
+
+.animate-float-slow {
+  animation: float-slow 4s infinite ease-in-out;
+}
+
+@keyframes drop-fade {
+  0% { transform: translateY(-10px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.animate-drop-fade {
+  animation: drop-fade 0.5s steps(5) forwards; /* Step-like retro transition */
+}
